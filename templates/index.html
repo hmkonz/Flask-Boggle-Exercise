@@ -1,28 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Boggle</title>
-    <script src="https://unpkg.com/axios/dist/axios.js"></script>
-  </head>
-  <body>
-    <table>
-      {% for row in board %}
-      <tr></tr>
-      {% for cell in row %}
-      <td>{{cell}}</td>
-      {% endfor %} {% endfor %}
-    </table>
-    <br />
+{% extends 'base.html' %} {% block title %} Boggle Exercise {% endblock %} {%
+block content %}
+<h1> Let's Play Boggle!!</h1>
+<div class="highscore-container">
+  <p>High Score: <b>{{ highscore }}</b></p>
+  <p>Times Played: <b>{{ number_of_plays }}</b></p>
+</div>
 
-    <form>
-      <input type="text" size="10" id="word" placeholder="Guess a word" />
-      <button type="submit" id="submit">Submit</button>
-    </form>
-    <p></p>
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-    <script src="/static/app.js"></script>
-  </body>
-</html>
+<div id="table-container">
+  <table>
+    {% for row in board %}
+    <tr>
+      {% for letter in row %}
+      <td>{{letter}}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+<br>
+<!-- form allows user to submit a guess -->
+<form id='form' method = "POST"</form>
+  <!-- autofocus puts the cursor in the input box automatically -->
+  <input type="text" size="10" id="word" placeholder="Guess a word" autofocus />
+  <button type="submit" id="submit">Submit</button>
+</form>
+
+<div>
+  <p id = "p-container">
+    Score: <b id="score">0</b>
+    Seconds Left: <b id="timer"></b>
+  </p>
+   <!-- JS will put messages here dynamically after word is entered -->
+  <p id="result"></p>
+</div>
+
+<p id="word-list">Word List</p>
+
+</p>
+<ul id="words">
+  <!-- JS will put valid guessed words here as they are entered -->
+</ul>
+
+{% endblock %}
